@@ -1,0 +1,271 @@
+<div
+    id="role-policy"
+    class="page-layout carded fullwidth inner-scroll"
+    style="width: 100%"
+>
+    <mat-form-field style="margin-top: 1em; margin-left: 1em; width: 23%">
+        <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'heroicons_outline:filter'"
+            matPrefix
+        ></mat-icon>
+        <mat-label>Choose a Role</mat-label>
+        <mat-select (selectionChange)="onRoleChange($event)">
+            <mat-option *ngFor="let role of roles" [value]="role.key">
+                {{ role.value }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="center" *ngIf="showDiv">
+        <div class="role-policy-main">
+            <form [formGroup]="rolePolicyForm" class="rate-form">
+                <table class="table table-border edit-rate-table">
+                    <thead class="text-nowrap">
+                        <th style="height: 61.8px">
+                            <span class="ui-column-resizer"
+                                >Group Heading
+                            </span>
+                        </th>
+                        <th class="role-col">
+                            <span class="ui-column-resizer">
+                                Menu/Resource
+                            </span>
+                        </th>
+                        <th>
+                            <span class="ui-column-resizer"> Allow </span>
+                        </th>
+                        <th>
+                            <span class="ui-column-resizer"> create </span>
+                        </th>
+                        <th>
+                            <span class="ui-column-resizer"> edit </span>
+                        </th>
+
+                        <th>
+                            <span class="ui-column-resizer"> review </span>
+                        </th>
+                        <th>
+                            <span class="ui-column-resizer"> approve </span>
+                        </th>
+
+                        <th>
+                            <span class="ui-column-resizer"> delete </span>
+                        </th>
+                        <th style="height: 61.8px">
+                            <span class="ui-column-resizer"> full Access </span>
+                        </th>
+                    </thead>
+
+                    <tbody>
+                        <ng-container
+                            formArrayName="rolePolicyList"
+                            *ngFor="
+                                let group of getFormControls.controls;
+                                let i = index
+                            "
+                        >
+                            <tr [formGroupName]="i">
+                                <td>
+                                    <mat-form-field
+                                        class="rate-edit-field no-mr-top"
+                                    >
+                                        <input
+                                            matInput
+                                            type="text"
+                                            formControlName="parent_navigation"
+                                            readonly
+                                        />
+                                    </mat-form-field>
+                                </td>
+                                <td class="role-col">
+                                    <mat-form-field
+                                        class="rate-edit-field no-mr-top all-matformfield"
+                                    >
+                                        <input
+                                            matInput
+                                            type="text"
+                                            formControlName="navigation"
+                                            readonly
+                                        />
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-checkbox
+                                        formControlName="allowed"
+                                        class="form-control"
+                                    ></mat-checkbox>
+                                </td>
+
+                                <td>
+                                    <mat-checkbox
+                                        formControlName="can_create"
+                                        class="form-control"
+                                    ></mat-checkbox>
+                                </td>
+
+                                <td>
+                                    <mat-checkbox
+                                        formControlName="can_edit"
+                                        class="form-control"
+                                    ></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox
+                                        formControlName="can_review"
+                                        class="form-control"
+                                    ></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox
+                                        formControlName="can_approve"
+                                        class="form-control"
+                                    ></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox
+                                        formControlName="can_delete"
+                                        class="form-control"
+                                    >
+                                    </mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox
+                                        formControlName="can_full_access"
+                                        class="form-control"
+                                    >
+                                    </mat-checkbox>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </form>
+            <div class="action-container">
+                <button mat-raised-button color="primary" (click)="saveClick()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="flex flex-col items-center mt-10 sm:mt-20">
+    <fuse-card
+        class="flex-col lg:flex-row w-full lg:max-w-7xl overflow-x-auto overflow-y-hidden"
+    >
+        <div
+            class="grid grid-flow-col lg:grid-flow-row min-w-max lg:min-w-0 divide-x lg:divide-x-0 lg:divide-y"
+        >
+            <div
+                class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x"
+            >
+                <div
+                    class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left"
+                >
+                    Unlimited projects
+                </div>
+        
+                <div
+                    class="flex items-center justify-center lg:justify-start p-4"
+                >
+                    <mat-icon
+                        class="icon-size-5 text-green-600"
+                        [svgIcon]="'heroicons_solid:check'"
+                    ></mat-icon>
+                </div>
+              
+                <div
+                    class="flex items-center justify-center lg:justify-start p-4"
+                >
+                    <mat-icon
+                        class="icon-size-5 text-green-600"
+                        [svgIcon]="'heroicons_solid:check'"
+                    ></mat-icon>
+                </div>
+              
+                <div
+                    class="flex items-center justify-center lg:justify-start p-4"
+                >
+                    <mat-icon
+                        class="icon-size-5 text-green-600"
+                        [svgIcon]="'heroicons_solid:check'"
+                    ></mat-icon>
+                </div>
+            </div>
+
+            <div
+                class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x"
+            >
+                <div
+                    class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left"
+                >
+                    Unlimited storage
+                </div>
+           
+                <div
+                    class="flex items-center justify-center lg:justify-start p-4"
+                >
+                    <mat-icon
+                        class="icon-size-5 text-green-600"
+                        [svgIcon]="'heroicons_solid:check'"
+                    ></mat-icon>
+                </div>
+             
+                <div
+                    class="flex items-center justify-center lg:justify-start p-4"
+                >
+                    <mat-icon
+                        class="icon-size-5 text-green-600"
+                        [svgIcon]="'heroicons_solid:check'"
+                    ></mat-icon>
+                </div>
+           
+                <div
+                    class="flex items-center justify-center lg:justify-start p-4"
+                >
+                    <mat-icon
+                        class="icon-size-5 text-green-600"
+                        [svgIcon]="'heroicons_solid:check'"
+                    ></mat-icon>
+                </div>
+            </div>
+
+            <div
+                class="grid grid-flow-row auto-rows-fr lg:grid-flow-col lg:auto-cols-fr divide-y lg:divide-y-0 lg:divide-x"
+            >
+                <div
+                    class="flex items-center lg:items-start max-w-32 lg:max-w-none p-4 font-medium lg:font-normal text-center lg:text-left"
+                >
+                    Custom domain support
+                </div>
+        
+                <div
+                    class="flex items-center justify-center lg:justify-start p-4"
+                >
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:minus'"
+                    ></mat-icon>
+                </div>
+            
+                <div
+                    class="flex items-center justify-center lg:justify-start p-4"
+                >
+                    <mat-icon
+                        class="icon-size-5 text-green-600"
+                        [svgIcon]="'heroicons_solid:check'"
+                    ></mat-icon>
+                </div>
+         
+                <div
+                    class="flex items-center justify-center lg:justify-start p-4"
+                >
+                    <mat-icon
+                        class="icon-size-5 text-green-600"
+                        [svgIcon]="'heroicons_solid:check'"
+                    ></mat-icon>
+                </div>
+            </div>
+        </div>
+    </fuse-card>
+</div> -->

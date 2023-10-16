@@ -1,0 +1,20 @@
+node v16.15.0  
+npm install npm@9.1.2 -g
+
+For NSWAG package
+Go to View > Other Windows > Package Manager Console
+Install-Package NSwag.AspNetCore
+
+in Program.cs: Add
+builder.Services.AddOpenApiDocument();
+
+if (app.Environment.IsDevelopment())
+{
+    // Add OpenAPI 3.0 document serving middleware
+    // Available at: http://localhost:<port>/swagger/v1/swagger.json
+    app.UseOpenApi();
+
+    // Add web UIs to interact with the document
+    // Available at: http://localhost:<port>/swagger
+    app.UseSwaggerUi3();
+}

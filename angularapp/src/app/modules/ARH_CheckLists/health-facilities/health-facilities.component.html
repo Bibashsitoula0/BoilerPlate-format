@@ -1,0 +1,131 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent"
+    >
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
+                >
+                    Private Health Facilities
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div class="flex-auto p-12 sm:p-10">
+        <form
+            class="p-4 bg-card shadow rounded overflow-hidden"
+            [formGroup]="healthFacilitiesForm"
+        >
+            <mat-form-field class="example-full-width_date">
+                <mat-label>Province</mat-label>
+                <mat-select
+                    formControlName="province_id"
+                    required
+                    (selectionChange)="onProvinceChangeForP_address($event)"
+                >
+                    <mat-option
+                        *ngFor="let item of provinceList"
+                        [value]="item.key"
+                    >
+                        {{ item.value }}
+                    </mat-option>
+                </mat-select>
+                <mat-error>Province is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width_date">
+                <mat-label>District</mat-label>
+                <mat-select
+                    formControlName="district_id"
+                    required
+                    (selectionChange)="onDistrictChangeForP_address($event)"
+                >
+                    <mat-option
+                        *ngFor="let item of districtList"
+                        [value]="item.key"
+                    >
+                        {{ item.value }}
+                    </mat-option>
+                </mat-select>
+                <mat-error>District is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width_date">
+                <mat-label>Municipality</mat-label>
+                <mat-select formControlName="palika_id" required>
+                    <mat-option
+                        *ngFor="let item of palikaList"
+                        [value]="item.key"
+                    >
+                        {{ item.value }}
+                    </mat-option>
+                </mat-select>
+                <mat-error>Municipality is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width_date">
+                <mat-label>Ward No.</mat-label>
+                <input formControlName="ward" type="text" matInput />
+                <mat-error>Ward No. is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width_date">
+                <mat-label>Tole</mat-label>
+                <input formControlName="tole" type="text" matInput />
+                <mat-error>Tole is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Name of Health Facility</mat-label>
+                <input
+                    formControlName="healthFacilitiy_name"
+                    type="text"
+                    matInput
+                />
+                <mat-error> Health Facility name is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width_date">
+                <mat-label>UCPVA Priorities ward</mat-label>
+                <mat-select formControlName="prioritiesWard">
+                    <mat-option value="Yes">Yes</mat-option>
+                    <mat-option value="No">No</mat-option>
+                </mat-select>
+                <mat-error>Choose any one</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width_date">
+                <mat-label>Type of HF </mat-label>
+                <mat-select formControlName="hf_type">
+                    <mat-option *ngFor="let item of hfList" value="item.key">{{
+                        item.value
+                    }}</mat-option>
+                </mat-select>
+                <mat-error>Choose a type of Health Facilility</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Name of Service Provider</mat-label>
+                <input
+                    formControlName="serviceProviderName"
+                    type="text"
+                    matInput
+                />
+                <mat-error> Service Provider name is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width_date">
+                <mat-label>Contact Number </mat-label>
+                <input formControlName="contactno" type="number" matInput />
+                <mat-error>Contact Number is required</mat-error>
+            </mat-form-field>
+            <div
+                class="flex items-center justify-end"
+                style="margin-right: 1rem; margin-bottom: 1rem"
+            >
+                <button
+                    class="ml-4"
+                    mat-flat-button
+                    type="button"
+                    [color]="'primary'"
+                    (click)="OnSave()"
+                >
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

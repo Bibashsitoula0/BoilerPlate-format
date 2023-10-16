@@ -1,0 +1,47 @@
+.example-card {
+    max-width: 400px;
+}
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 50%;
+    padding: 4px;
+}
+.example-full-width_date {
+    width: 20%;
+    padding: 4px;
+}
+.example-full-width_10 {
+    width: 10%;
+    padding: 4px;
+}
+.text-box-observation {
+    padding-left: 9px;
+    width: 39%;
+}
+.text-box-remarks {
+    padding-left: 9px;
+    width: 39%;
+}
+.total-score {
+    float: right;
+    margin-right: 5rem;
+}
+// .example-card {
+//     display: flex;
+//     flex-direction: column; /* Stack form fields vertically */
+//     align-items: flex-start; /* Align items to the start (left) */
+// }
+
+// .mat-form-field {
+//     width: 100%; /* Take full width of the parent (the card) */
+//     margin-bottom: 16px; /* Add some margin between form fields */
+// }
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-disabled,
+::ng-deep .mat-form-field-outline {
+    opacity: 0;
+}

@@ -1,0 +1,161 @@
+<!-- <div *ngIf="geolocation$ | async as position">
+    <span>{{ position.coords.latitude }}</span>
+</div> -->
+<div class="flex flex-col flex-auto min-w-0">
+    <div class="flex-auto p-6 sm:p-10">
+        <div class="max-w-3xl">
+            <fuse-alert
+                class="mt-8"
+                *ngIf="showAlert"
+                [appearance]="'outline'"
+                [showIcon]="false"
+                [type]="alert.type"
+                [@shake]="alert.type === 'error'"
+            >
+                {{ alert.message }}
+            </fuse-alert>
+            <form
+                class="flex flex-col mt-4 px-8 pt-10 bg-card shadow rounded overflow-hidden"
+                [formGroup]="formData"
+            >
+                <div class="flex">
+                    <!-- <mat-form-field>
+                        <mat-select
+                            (openedChange)="openedChange($event)"
+                            placeholder="Select"
+                            [formControl]="selectFormControl"
+                            multiple
+                        >
+                            <mat-select-trigger>
+                                {{
+                                    selectFormControl.value
+                                        ? selectFormControl.value[0]
+                                        : ""
+                                }}
+                                <span
+                                    *ngIf="selectFormControl.value?.length > 1"
+                                    class="additional-selection"
+                                >
+                                    (+{{ selectFormControl.value.length - 1 }}
+                                    {{
+                                        selectFormControl.value?.length === 2
+                                            ? "other"
+                                            : "others"
+                                    }})
+                                </span>
+                            </mat-select-trigger>
+                            <div class="select-container">
+                                <mat-optgroup>
+                                    <mat-form-field style="width: 100%">
+                                        <input
+                                            #search
+                                            autocomplete="off"
+                                            placeholder="Search"
+                                            aria-label="Search"
+                                            matInput
+                                            [formControl]="searchTextboxControl"
+                                        />
+                                        <button
+                                            [disableRipple]="true"
+                                            *ngIf="search.value"
+                                            matSuffix
+                                            mat-icon-button
+                                            aria-label="Clear"
+                                            (click)="clearSearch($event)"
+                                        >
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </mat-optgroup>
+                                <mat-optgroup
+                                    *ngIf="
+                                        (filteredOptions | async).length == 0
+                                    "
+                                >
+                                    <div>No results found!</div>
+                                </mat-optgroup>
+                                <mat-option
+                                    (onSelectionChange)="
+                                        selectionChange($event)
+                                    "
+                                    *ngFor="
+                                        let option of filteredOptions | async
+                                    "
+                                    [value]="option"
+                                >
+                                    {{ option }}
+                                </mat-option>
+                            </div>
+                        </mat-select>
+                    </mat-form-field> -->
+                    <div *ngIf="selectFormControl.value">
+                        {{ "You have choosen " + selectFormControl.value }}
+                    </div>
+                    <mat-form-field class="flex-auto">
+                        <input
+                            matInput
+                            [placeholder]="'longitude'"
+                            [formControlName]="'longitude'"
+                        />
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:mail'"
+                        ></mat-icon>
+                        <mat-error
+                            *ngIf="
+                                formData.get('longitude').hasError('required')
+                            "
+                        >
+                            longitude is required</mat-error
+                        >
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field class="flex-auto">
+                        <input
+                            matInput
+                            [placeholder]="'latitude'"
+                            [formControlName]="'latitude'"
+                        />
+                        <mat-icon
+                            class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'add_location'"
+                        ></mat-icon>
+                        <mat-error
+                            *ngIf="
+                                formData.get('latitude').hasError('required')
+                            "
+                            >latitude is required</mat-error
+                        >
+                    </mat-form-field>
+                </div>
+                <mat-slide-toggle (change)="onLocationToggleChange($event)"
+                    >Track my Location</mat-slide-toggle
+                >
+                <ngx-recaptcha2
+                    #captchaElem
+                    [siteKey]="siteKey"
+                    (reset)="handleReset()"
+                    (expire)="handleExpire()"
+                    (load)="handleLoad()"
+                    (success)="handleSuccess($event)"
+                    formControlName="recaptcha"
+                ></ngx-recaptcha2>
+                <mat-error
+                    *ngIf="formData.get('recaptcha').hasError('required')"
+                    >Enter a valid Captcha</mat-error
+                >
+                <button
+                    class="fuse-mat-button-large w-full mt-6"
+                    mat-flat-button
+                    [color]="'primary'"
+                    (click)="OnSubmit()"
+                >
+                    <span> Submit </span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
